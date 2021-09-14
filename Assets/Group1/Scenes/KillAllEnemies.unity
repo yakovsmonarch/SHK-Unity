@@ -368,9 +368,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6d0074e725a114e850d2e604fe4b0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go: {fileID: 1054253062}
-  a: {fileID: 1761935009}
-  B:
+  GameOverScreen: {fileID: 1054253062}
+  Player: {fileID: 1761935009}
+  Enemies:
   - {fileID: 2083640146}
   - {fileID: 1754708960}
   - {fileID: 141422275}
@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 1578050039}
   - component: {fileID: 1578050038}
   m_Layer: 0
-  m_Name: enemy
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
