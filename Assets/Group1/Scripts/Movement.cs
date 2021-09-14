@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewBehaviourScript1 : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     public float spEed;
     public bool timer;
@@ -28,7 +28,7 @@ public class NewBehaviourScript1 : MonoBehaviour
 
         if(result.Length == 0)
         {
-            GameController.controller.End();
+            CollisionChecker.controller.End();
             enabled = false;
         }
 

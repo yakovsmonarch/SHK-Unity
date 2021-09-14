@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class CollisionChecker : MonoBehaviour
 {
-    public static GameController controller;
+    public static CollisionChecker controller;
 
     public GameObject go;
     public GameObject a;
