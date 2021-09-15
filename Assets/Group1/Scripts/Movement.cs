@@ -13,12 +13,12 @@ public class Movement : MonoBehaviour
 
     private void OnEnable()
     {
-        _collisionChecker.CollisionEnemy += CollisionAction;
+        _collisionChecker.CollisionEnemy += CollisionEnemy;
     }
 
     private void OnDisable()
     {
-        _collisionChecker.CollisionEnemy -= CollisionAction;
+        _collisionChecker.CollisionEnemy -= CollisionEnemy;
     }
 
     private void Update()
@@ -48,18 +48,16 @@ public class Movement : MonoBehaviour
             transform.Translate(_speed * Time.deltaTime, 0, 0);
     }
 
-    private void CollisionAction(GameObject gameObject)
+    private void CollisionEnemy(GameObject enemy)
     {
-        if (gameObject.name == "Enemy")
-        {
-            Destroy(gameObject);
-        }
-        if (gameObject.name == "speed")
-        {
-            _speed *= 2;
-            _isTimer = true;
-            _time = 2;
-        }
+        Destroy(enemy);
+    }
+
+    private void CollisionSpeed(GameObject speedObject)
+    {
+        _speed *= 2;
+        _isTimer = true;
+        _time = 2;
     }
 
     private void CheckingGameOver()

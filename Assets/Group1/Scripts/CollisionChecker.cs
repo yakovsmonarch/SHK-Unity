@@ -7,10 +7,13 @@ public class CollisionChecker : MonoBehaviour
 {
     public event UnityAction<GameObject> CollisionEnemy;
 
-    [SerializeField] private GameObject GameOverScreen;
-    [SerializeField] private GameObject Player;
-    [SerializeField] private GameObject[] Enemies;
+    [SerializeField] private GameObject _gameOverScreen;
+    [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject[] _enemies;
+    [SerializeField] private GameObject[] _speedObjects;
     [SerializeField] private Movement _movement;
+
+    private float _distance = 0.2f;
 
     private void OnEnable()
     {
@@ -24,20 +27,27 @@ public class CollisionChecker : MonoBehaviour
 
     private void Update()
     {
-        foreach (var enemy in Enemies)
+        CheckCollisionWithPlayer(_enemies);
+        CheckCollisionWithPlayer(_speedObjects);
+    }
+
+    private void CheckCollisionWithPlayer(GameObject[] gameObjects)
+    {
+        foreach (var gameObj in gameObjects)
         {
-            if (enemy == null)
+            if (gameObj == null)
                 continue;
 
-            if (Vector3.Distance(Player.gameObject.gameObject.GetComponent<Transform>().position, enemy.gameObject.gameObject.transform.position) < 0.2f)
+            if (Vector3.Distance(_player.gameObject.gameObject.GetComponent<Transform>().position, 
+                gameObj.gameObject.gameObject.transform.position) < _distance)
             {
-                CollisionEnemy?.Invoke(enemy);
+                CollisionEnemy?.Invoke(gameObj);
             }
         }
     }
 
     private void ActivateGameOverScreen()
     {
-        GameOverScreen.SetActive(true);
+        _gameOverScreen.SetActive(true);
     }
 }
