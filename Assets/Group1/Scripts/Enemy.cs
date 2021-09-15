@@ -11,11 +11,15 @@ public class Enemy : MonoBehaviour
         Target = Random.insideUnitCircle * 4;
     }
 
-
     private void Update()
+    {
+        Move();
+    }
+
+    private void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, Target, 2 * Time.deltaTime);
         if (transform.position == Target)
-            Target = Random.insideUnitCircle * 4    ;
+            Target = Random.insideUnitCircle * 4;
     }
 }

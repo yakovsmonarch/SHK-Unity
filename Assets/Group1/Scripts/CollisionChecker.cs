@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class CollisionChecker : MonoBehaviour
 {
+    public event UnityAction<GameObject> CollisionEnemy;
+
     [SerializeField] private GameObject GameOverScreen;
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject[] Enemies;
@@ -27,11 +29,10 @@ public class CollisionChecker : MonoBehaviour
             if (enemy == null)
                 continue;
 
-                if (Vector3.Distance(Player.gameObject.gameObject.GetComponent<Transform>().position, enemy.gameObject.gameObject.transform.position) < 0.2f)
-                {
-                    Player.SendMessage("SendMEssage", enemy);
-                }
-
+            if (Vector3.Distance(Player.gameObject.gameObject.GetComponent<Transform>().position, enemy.gameObject.gameObject.transform.position) < 0.2f)
+            {
+                CollisionEnemy?.Invoke(enemy);
+            }
         }
     }
 

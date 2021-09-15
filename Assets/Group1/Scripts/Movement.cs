@@ -6,57 +6,70 @@ public class Movement : MonoBehaviour
 {
     public event UnityAction GameOver;
 
-    public float spEed;
-    public bool timer;
-    public float time;
+    [SerializeField] private CollisionChecker _collisionChecker;
+    [SerializeField] private float _speed;
+    [SerializeField] private bool _isTimer;
+    [SerializeField] private float _time;
 
-    private void Update(){
-        if (timer)
+    private void OnEnable()
+    {
+        _collisionChecker.CollisionEnemy += CollisionAction;
+    }
+
+    private void OnDisable()
+    {
+        _collisionChecker.CollisionEnemy -= CollisionAction;
+    }
+
+    private void Update()
+    {
+        if (_isTimer)
         {
-            time -= Time.deltaTime;
-            if(time < 0)
-   {
-                timer = false;
-                spEed /= 2;
+            _time -= Time.deltaTime;
+            if (_time < 0)
+            {
+                _isTimer = false;
+                _speed /= 2;
             }
         }
 
+        CheckingGameOver();
+
+        if (Input.GetKey(KeyCode.W))
+            transform.Translate(0, _speed * Time.deltaTime, 0);
+
+        if (Input.GetKey(KeyCode.S))
+            transform.Translate(0, -_speed * Time.deltaTime, 0);
+
+        if (Input.GetKey(KeyCode.A))
+            transform.Translate(-_speed * Time.deltaTime, 0, 0);
+
+        if (Input.GetKey(KeyCode.D))
+            transform.Translate(_speed * Time.deltaTime, 0, 0);
+    }
+
+    private void CollisionAction(GameObject gameObject)
+    {
+        if (gameObject.name == "Enemy")
+        {
+            Destroy(gameObject);
+        }
+        if (gameObject.name == "speed")
+        {
+            _speed *= 2;
+            _isTimer = true;
+            _time = 2;
+        }
+    }
+
+    private void CheckingGameOver()
+    {
         GameObject[] result = GameObject.FindGameObjectsWithTag("Enemy");
 
-        if(result.Length == 0)
+        if (result.Length == 0)
         {
             GameOver?.Invoke();
             enabled = false;
-        }
-
-        if (Input.GetKey(KeyCode.W))
-            transform.Translate(0, spEed * Time.deltaTime, 0);
-
-        if (Input.GetKey(KeyCode.S))
-            transform.Translate(0, -spEed * Time.deltaTime, 0);
-
-        if (Input.GetKey(KeyCode.A))
-            transform.Translate(-spEed * Time.deltaTime, 0, 0);
-
-        if (Input.GetKey(KeyCode.D))
-            transform.Translate(spEed * Time.deltaTime, 0, 0);
-    }
-
-    public void SendMEssage(GameObject b)
-    {
-
-
-        if(b.name == "Enemy")
-        {
-            Destroy(b);
-        }if(b.name == "speed")
-        {
-            spEed *= 2;
-            timer = true;
-            time = 2;
-
-
-
         }
     }
 }
