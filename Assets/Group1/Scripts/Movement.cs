@@ -1,19 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 public class Movement : MonoBehaviour
 {
+    public event UnityAction GameOver;
+
     public float spEed;
     public bool timer;
     public float time;
-    // Use this for initialization
 
-
-    void Start()
-    {
-    }
-    // Update is called once per frame
-    void Update(){
+    private void Update(){
         if (timer)
         {
             time -= Time.deltaTime;
@@ -28,7 +25,7 @@ public class Movement : MonoBehaviour
 
         if(result.Length == 0)
         {
-            CollisionChecker.controller.End();
+            GameOver?.Invoke();
             enabled = false;
         }
 
@@ -49,7 +46,7 @@ public class Movement : MonoBehaviour
     {
 
 
-        if(b.name == "enemy")
+        if(b.name == "Enemy")
         {
             Destroy(b);
         }if(b.name == "speed")

@@ -1,36 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CollisionChecker : MonoBehaviour
 {
-    public static CollisionChecker controller;
+    [SerializeField] private GameObject GameOverScreen;
+    [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject[] Enemies;
+    [SerializeField] private Movement _movement;
 
-    public GameObject GameOverScreen;
-    public GameObject Player;
-    public GameObject[] Enemies;
-
-    private void Start()
+    private void OnEnable()
     {
-        controller = this;
+        _movement.GameOver += ActivateGameOverScreen;
     }
 
-    private void End()
+    private void OnDisable()
     {
-        GameOverScreen.SetActive(true);
+        _movement.GameOver -= ActivateGameOverScreen;
     }
 
-    private void Update(){
-        foreach (var b in Enemies)
+    private void Update()
+    {
+        foreach (var enemy in Enemies)
         {
-            if (b == null)
+            if (enemy == null)
                 continue;
 
-                if (Vector3.Distance(Player.gameObject.gameObject.GetComponent<Transform>().position, b.gameObject.gameObject.transform.position) < 0.2f)
+                if (Vector3.Distance(Player.gameObject.gameObject.GetComponent<Transform>().position, enemy.gameObject.gameObject.transform.position) < 0.2f)
                 {
-                    Player.SendMessage("SendMEssage", b);
+                    Player.SendMessage("SendMEssage", enemy);
                 }
 
         }
+    }
+
+    private void ActivateGameOverScreen()
+    {
+        GameOverScreen.SetActive(true);
     }
 }
