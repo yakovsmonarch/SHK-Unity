@@ -23,27 +23,8 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        if (_isTimer)
-        {
-            _time -= Time.deltaTime;
-            if (_time < 0)
-            {
-                _isTimer = false;
-                _speed /= 2;
-            }
-        }
-
-        if (Input.GetKey(KeyCode.W))
-            transform.Translate(0, _speed * Time.deltaTime, 0);
-
-        if (Input.GetKey(KeyCode.S))
-            transform.Translate(0, -_speed * Time.deltaTime, 0);
-
-        if (Input.GetKey(KeyCode.A))
-            transform.Translate(-_speed * Time.deltaTime, 0, 0);
-
-        if (Input.GetKey(KeyCode.D))
-            transform.Translate(_speed * Time.deltaTime, 0, 0);
+        CountingDownTimer();
+        GivingDirectionPlayer();
     }
 
     private void CollisionObject(GameObject gameObject)
@@ -73,5 +54,33 @@ public class Movement : MonoBehaviour
             GameOver?.Invoke();
             enabled = false;
         }
+    }
+
+    private void CountingDownTimer()
+    {
+        if (_isTimer == true)
+        {
+            _time -= Time.deltaTime;
+            if (_time < 0)
+            {
+                _isTimer = false;
+                _speed /= 2;
+            }
+        }
+    }
+
+    private void GivingDirectionPlayer()
+    {
+        if (Input.GetKey(KeyCode.W))
+            transform.Translate(0, _speed * Time.deltaTime, 0);
+
+        if (Input.GetKey(KeyCode.S))
+            transform.Translate(0, -_speed * Time.deltaTime, 0);
+
+        if (Input.GetKey(KeyCode.A))
+            transform.Translate(-_speed * Time.deltaTime, 0, 0);
+
+        if (Input.GetKey(KeyCode.D))
+            transform.Translate(_speed * Time.deltaTime, 0, 0);
     }
 }
