@@ -368,13 +368,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6d0074e725a114e850d2e604fe4b0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverScreen: {fileID: 1054253062}
-  Player: {fileID: 1761935009}
-  Enemies:
+  _gameOverScreen: {fileID: 1054253062}
+  _player: {fileID: 1761935009}
+  _enemies:
   - {fileID: 2083640146}
   - {fileID: 1754708960}
   - {fileID: 141422275}
   - {fileID: 1578050036}
+  _speedObjects: []
   _movement: {fileID: 1761935012}
 --- !u!1 &1054253062
 GameObject:

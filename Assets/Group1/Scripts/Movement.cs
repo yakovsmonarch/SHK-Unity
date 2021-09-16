@@ -6,19 +6,19 @@ public class Movement : MonoBehaviour
 {
     public event UnityAction GameOver;
 
-    [SerializeField] private CollisionChecker _collisionChecker;
+    [SerializeField] private IntaractionGameObjects _collisionChecker;
     [SerializeField] private float _speed;
     [SerializeField] private bool _isTimer;
     [SerializeField] private float _time;
 
     private void OnEnable()
     {
-        _collisionChecker.CollisionEnemy += CollisionEnemy;
+        _collisionChecker.CollisionEnemy += CollisionObject;
     }
 
     private void OnDisable()
     {
-        _collisionChecker.CollisionEnemy -= CollisionEnemy;
+        _collisionChecker.CollisionEnemy -= CollisionObject;
     }
 
     private void Update()
@@ -33,8 +33,6 @@ public class Movement : MonoBehaviour
             }
         }
 
-        CheckingGameOver();
-
         if (Input.GetKey(KeyCode.W))
             transform.Translate(0, _speed * Time.deltaTime, 0);
 
@@ -48,23 +46,29 @@ public class Movement : MonoBehaviour
             transform.Translate(_speed * Time.deltaTime, 0, 0);
     }
 
-    private void CollisionEnemy(GameObject enemy)
+    private void CollisionObject(GameObject gameObject)
     {
-        Destroy(enemy);
+        if (gameObject.GetComponent<Enemy>())
+        {
+            Destroy(gameObject);
+            CheckingGameOver(gameObject.name);
+        }
+        else
+        {
+            if (gameObject.GetComponent<SpeedObject>())
+            {
+                _speed *= 2;
+                _isTimer = true;
+                _time = 2;
+            }
+        }
     }
 
-    private void CollisionSpeed(GameObject speedObject)
+    private void CheckingGameOver(string nameObject)
     {
-        _speed *= 2;
-        _isTimer = true;
-        _time = 2;
-    }
+        GameObject[] result = GameObject.FindGameObjectsWithTag(nameObject);
 
-    private void CheckingGameOver()
-    {
-        GameObject[] result = GameObject.FindGameObjectsWithTag("Enemy");
-
-        if (result.Length == 0)
+        if (result.Length <= 1)
         {
             GameOver?.Invoke();
             enabled = false;

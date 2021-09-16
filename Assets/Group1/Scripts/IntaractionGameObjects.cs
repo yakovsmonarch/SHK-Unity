@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CollisionChecker : MonoBehaviour
+public class IntaractionGameObjects : MonoBehaviour
 {
     public event UnityAction<GameObject> CollisionEnemy;
 
