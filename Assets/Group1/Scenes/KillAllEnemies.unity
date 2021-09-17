@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 141422278}
   - component: {fileID: 141422277}
   m_Layer: 0
-  m_Name: enemy
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,13 +368,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6d0074e725a114e850d2e604fe4b0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go: {fileID: 1054253062}
-  a: {fileID: 1761935009}
-  B:
+  _gameOverScreen: {fileID: 1054253062}
+  _player: {fileID: 1761935009}
+  _enemies:
   - {fileID: 2083640146}
   - {fileID: 1754708960}
   - {fileID: 141422275}
   - {fileID: 1578050036}
+  _speedObjects: []
+  _movement: {fileID: 1761935012}
 --- !u!1 &1054253062
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +388,7 @@ GameObject:
   - component: {fileID: 1054253064}
   - component: {fileID: 1054253063}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: GameOverScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,7 +468,7 @@ GameObject:
   - component: {fileID: 1578050039}
   - component: {fileID: 1578050038}
   m_Layer: 0
-  m_Name: enemy
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -558,7 +560,7 @@ GameObject:
   - component: {fileID: 1754708963}
   - component: {fileID: 1754708962}
   m_Layer: 0
-  m_Name: enemy
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -650,7 +652,7 @@ GameObject:
   - component: {fileID: 1761935010}
   - component: {fileID: 1761935012}
   m_Layer: 0
-  m_Name: New Sprite (1)
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -730,9 +732,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dede9e7d6741aea4cb07b98da83cc6a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spEed: 4
-  timer: 0
-  time: 0
+  _collisionChecker: {fileID: 534669906}
+  _speed: 5
+  _isTimer: 1
+  _time: 10
 --- !u!1 &2083640146
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,7 +748,7 @@ GameObject:
   - component: {fileID: 2083640147}
   - component: {fileID: 2083640150}
   m_Layer: 0
-  m_Name: enemy
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
