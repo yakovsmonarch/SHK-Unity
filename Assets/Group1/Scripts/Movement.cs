@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
     public event UnityAction GameOver;
 
-    [SerializeField] private IntaractionGameObjects _collisionChecker;
+    [SerializeField] private InteractionGameObjects _collisionChecker;
     [SerializeField] private float _speed;
     [SerializeField] private bool _isTimer;
     [SerializeField] private float _time;

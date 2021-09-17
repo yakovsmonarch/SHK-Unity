@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private float _radius;
+    [SerializeField] private float _speed;
+
     private Vector3 _target;
-    private float _radius = 4f;
-    private float _speed = 2f;
 
     private void Start()
     {
